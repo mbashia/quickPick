@@ -1,10 +1,18 @@
-<div class="flex  h-[70vh] rounded-3xl shadow-xl">
+<div class="flex  h-[75vh] rounded-3xl shadow-xl">
   <div class=" w-[40%] overflow-hidden ">
     <img src="/images/quickPick.jpeg" alt="Description of the image" class=" h-[100%] " />
   </div>
-  <div class="border w-[60%]">
-    <div class="border  border-blue-500 flex  justify-center items-center flex-col w-full px-4 py-4">
-     <span>Register</span>
+  <div class="border-l-[1px] border-t-[1px] w-[60%]">
+    <div class=" flex  justify-center items-center flex-col w-full px-4 py-4">
+      <div class="flex justify-items content-center">
+        <div class=" border px-6 shadow-xl hover:bg-[#4DAC46] hover:text-white poppins-regular hover:cursor-pointer  text-black mb-4 transition ease-in-out duration-300">
+          <span>Client</span>
+        </div>
+        <div class=" border px-6 shadow-xl hover:bg-[#4DAC46] hover:text-white poppins-regular hover:cursor-pointer  text-black mb-4 transition ease-in-out duration-300">
+          <span>Rider</span>
+        </div>
+      </div>
+      <span class="mb-4 poppins-bold text-2xl uppercase">SIGN UP</span>
 
       <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
         <%= if @changeset.action do %>
@@ -14,65 +22,75 @@
         <% end %>
 
         <div class="   flex flex-col">
-         <div class = "mb-6">
-         
-          <%= text_input(f, :firstname,
-            required: true,
-            class:
-              "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
-          placeholder: "firstname") %>
-          <%= error_tag(f, :firstname) %>
+          <div class="flex flex-row gap-4 mb-6">
+            <div>
+              <%= text_input(f, :firstname,
+                required: true,
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+                placeholder: "Firstname"
+              ) %>
+              <%= error_tag(f, :firstname) %>
+            </div>
+
+            <div>
+              <%= text_input(f, :lastname,
+                required: true,
+                placeholder: "Second name",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :lastname) %>
+            </div>
           </div>
-         
+          <div class="mb-6">
+            <%= text_input(f, :phone,
+              required: true,
+              placeholder: "Phone number",
+              class:
+                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+            ) %>
+            <%= error_tag(f, :phone) %>
+          </div>
 
-          
-          <%= text_input(f, :secondname,
-            required: true,
-            placeholder: "Second name",
-            class:
-              "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-          ) %>
-          <%= error_tag(f, :secondname) %>
+          <div class="mb-6">
+            <%= email_input(f, :email,
+              required: true,
+              placeholder: "Email",
+              class:
+                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+            ) %>
+            <%= error_tag(f, :email) %>
+          </div>
 
-          
-          <%= text_input(f, :phone_number,
-            required: true,
-            placeholder: "Phone number",
-            class:
-              "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-          ) %>
-          <%= error_tag(f, :phone_number) %>
+          <div class="mb-6">
+            <%= password_input(f, :password,
+              required: true,
+              placeholder: "Password",
+              class:
+                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+            ) %>
+            <%= error_tag(f, :password) %>
+          </div>
 
-         
-          <%= email_input(f, :email,
-            required: true,
-            placeholder: "Email",
-            class:
-              "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-          ) %>
-          <%= error_tag(f, :email) %>
-
-         
-          <%= password_input(f, :password,
-            required: true,
-            placeholder: "Password",
-            class:
-              "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-          ) %>
-          <%= error_tag(f, :password) %>
-
-         
-          <%= password_input(f, :confirm_pass,
-            required: true,
-            placeholder: "Confirm password",
-            class:
-              "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-          ) %>
-          <%= error_tag(f, :confirm_pass) %>
+          <div class="mb-6">
+            <%= password_input(f, :confirm_pass,
+              required: true,
+              placeholder: "Confirm password",
+              class:
+                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+            ) %>
+            <%= error_tag(f, :confirm_pass) %>
+          </div>
+          <div>
+            <%= hidden_input(f, :role, value: "customer") %>
+          </div>
         </div>
 
-        <div>
-          <%= submit("Register") %>
+        <div class="flex justify-center items-center  mb-4 ja-font text-white text-xl ">
+          <div class="bg-[#4DAC46] rounded-2xl px-6 py-2">
+            <%= submit("Register") %>
+          </div>
         </div>
       </.form>
 

@@ -10,6 +10,7 @@ defmodule QuickPick.Account.User do
     field :phone, :string
     field :confirm_pass, :string, virtual: true, redact: true
     field :id_number, :string, default: "0"
+    field :role, :string
 
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
@@ -36,7 +37,16 @@ defmodule QuickPick.Account.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [
+      :email,
+      :password,
+      :firstname,
+      :lastname,
+      :confirm_pass,
+      :phone,
+      :id_number,
+      :role
+    ])
     |> validate_email()
     |> validate_password(opts)
   end
@@ -54,6 +64,7 @@ defmodule QuickPick.Account.User do
     changeset
     |> validate_required([:password])
     |> validate_length(:password, min: 6, max: 72)
+    |> validate_confirm_pass()
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
@@ -70,6 +81,20 @@ defmodule QuickPick.Account.User do
       |> validate_length(:password, max: 72, count: :bytes)
       |> put_change(:hashed_password, Bcrypt.hash_pwd_salt(password))
       |> delete_change(:password)
+    else
+      changeset
+    end
+  end
+
+  defp validate_confirm_pass(changeset) do
+    password = get_field(changeset, :password)
+    confirm_pass = get_field(changeset, :confirm_pass)
+    IO.inspect(password)
+    IO.inspect(confirm_pass)
+
+    if password != confirm_pass do
+      changeset
+      |> add_error(:confirm_pass, "must match the password")
     else
       changeset
     end

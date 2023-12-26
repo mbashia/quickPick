@@ -10,6 +10,7 @@ defmodule QuickPick.Repo.Migrations.CreateUsersAuthTables do
       add :lastname, :string
       add :phone, :string
       add :id_number, :string, null: false
+      add :role, :string
       timestamps()
     end
 

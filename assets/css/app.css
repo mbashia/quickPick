@@ -1,14 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&family=Quicksand:wght@300;400;500;700&display=swap");
+
+
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&family=Libre+Baskerville:wght@700&family=M+PLUS+Rounded+1c&family=Montserrat:ital@1&family=Open+Sans:ital@1&family=Poppins:wght@300;500;700&family=Questrial&family=Roboto&display=swap");
+
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+/* * {
+  font-family: "Plus Jakarta Sans", sans-serif;
+} */
+
+.ja-font {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
 /* This file is for your main application CSS */
 
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
-  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
   border: 1px solid transparent;
   border-radius: 4px;
+  z-index: 1000;
+
 }
 .alert-info {
   color: #31708f;
