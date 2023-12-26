@@ -1,4 +1,6 @@
-<h1>Register</h1>
+<div class ="flex ">
+<div>here is the image for quickpic</div>
+<div><h1>Register</h1>
 
 <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
   <%= if @changeset.action do %>
@@ -46,3 +48,5 @@
   <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
   <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
 </p>
+</div>
+</div>

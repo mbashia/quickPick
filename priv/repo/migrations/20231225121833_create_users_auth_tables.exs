@@ -7,9 +7,9 @@ defmodule QuickPick.Repo.Migrations.CreateUsersAuthTables do
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
       add :firstname, :string
-    add :lastname, :string
-    add :phone, :string
-    add :id_number, :string, null: false
+      add :lastname, :string
+      add :phone, :string
+      add :id_number, :string, null: false
       timestamps()
     end
 
