@@ -19,7 +19,27 @@ defmodule QuickPick.Deliveries.Delivery do
   @doc false
   def changeset(delivery, attrs) do
     delivery
-    |> cast(attrs, [:from, :to, :price, :lats, :long, :customer_name, :customer_phone, :description, :status])
-    |> validate_required([:from, :to, :price, :lats, :long, :customer_name, :customer_phone, :description, :status])
+    |> cast(attrs, [
+      :from,
+      :to,
+      :price,
+      :lats,
+      :long,
+      :customer_name,
+      :customer_phone,
+      :description,
+      :status
+    ])
+    |> validate_required([
+      :from,
+      :to,
+      :price,
+      :lats,
+      :long,
+      :customer_name,
+      :customer_phone,
+      :description,
+      :status
+    ])
   end
 end

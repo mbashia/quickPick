@@ -8,7 +8,17 @@ defmodule QuickPick.DeliveriesTest do
 
     import QuickPick.DeliveriesFixtures
 
-    @invalid_attrs %{customer_name: nil, customer_phone: nil, description: nil, from: nil, lats: nil, long: nil, price: nil, status: nil, to: nil}
+    @invalid_attrs %{
+      customer_name: nil,
+      customer_phone: nil,
+      description: nil,
+      from: nil,
+      lats: nil,
+      long: nil,
+      price: nil,
+      status: nil,
+      to: nil
+    }
 
     test "list_deliveries/0 returns all deliveries" do
       delivery = delivery_fixture()
@@ -21,7 +31,17 @@ defmodule QuickPick.DeliveriesTest do
     end
 
     test "create_delivery/1 with valid data creates a delivery" do
-      valid_attrs = %{customer_name: "some customer_name", customer_phone: "some customer_phone", description: "some description", from: "some from", lats: "some lats", long: "some long", price: "some price", status: "some status", to: "some to"}
+      valid_attrs = %{
+        customer_name: "some customer_name",
+        customer_phone: "some customer_phone",
+        description: "some description",
+        from: "some from",
+        lats: "some lats",
+        long: "some long",
+        price: "some price",
+        status: "some status",
+        to: "some to"
+      }
 
       assert {:ok, %Delivery{} = delivery} = Deliveries.create_delivery(valid_attrs)
       assert delivery.customer_name == "some customer_name"
@@ -41,7 +61,18 @@ defmodule QuickPick.DeliveriesTest do
 
     test "update_delivery/2 with valid data updates the delivery" do
       delivery = delivery_fixture()
-      update_attrs = %{customer_name: "some updated customer_name", customer_phone: "some updated customer_phone", description: "some updated description", from: "some updated from", lats: "some updated lats", long: "some updated long", price: "some updated price", status: "some updated status", to: "some updated to"}
+
+      update_attrs = %{
+        customer_name: "some updated customer_name",
+        customer_phone: "some updated customer_phone",
+        description: "some updated description",
+        from: "some updated from",
+        lats: "some updated lats",
+        long: "some updated long",
+        price: "some updated price",
+        status: "some updated status",
+        to: "some updated to"
+      }
 
       assert {:ok, %Delivery{} = delivery} = Deliveries.update_delivery(delivery, update_attrs)
       assert delivery.customer_name == "some updated customer_name"

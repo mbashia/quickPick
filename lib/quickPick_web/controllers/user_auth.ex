@@ -45,7 +45,6 @@ defmodule QuickPickWeb.UserAuth do
         |> maybe_write_remember_me_cookie(token, params)
         |> redirect(to: signed_in_rider_path(conn))
 
-
       _ ->
         IO.puts("unknown role")
     end

@@ -4,9 +4,39 @@ defmodule QuickPickWeb.DeliveryLiveTest do
   import Phoenix.LiveViewTest
   import QuickPick.DeliveriesFixtures
 
-  @create_attrs %{customer_name: "some customer_name", customer_phone: "some customer_phone", description: "some description", from: "some from", lats: "some lats", long: "some long", price: "some price", status: "some status", to: "some to"}
-  @update_attrs %{customer_name: "some updated customer_name", customer_phone: "some updated customer_phone", description: "some updated description", from: "some updated from", lats: "some updated lats", long: "some updated long", price: "some updated price", status: "some updated status", to: "some updated to"}
-  @invalid_attrs %{customer_name: nil, customer_phone: nil, description: nil, from: nil, lats: nil, long: nil, price: nil, status: nil, to: nil}
+  @create_attrs %{
+    customer_name: "some customer_name",
+    customer_phone: "some customer_phone",
+    description: "some description",
+    from: "some from",
+    lats: "some lats",
+    long: "some long",
+    price: "some price",
+    status: "some status",
+    to: "some to"
+  }
+  @update_attrs %{
+    customer_name: "some updated customer_name",
+    customer_phone: "some updated customer_phone",
+    description: "some updated description",
+    from: "some updated from",
+    lats: "some updated lats",
+    long: "some updated long",
+    price: "some updated price",
+    status: "some updated status",
+    to: "some updated to"
+  }
+  @invalid_attrs %{
+    customer_name: nil,
+    customer_phone: nil,
+    description: nil,
+    from: nil,
+    lats: nil,
+    long: nil,
+    price: nil,
+    status: nil,
+    to: nil
+  }
 
   defp create_delivery(_) do
     delivery = delivery_fixture()

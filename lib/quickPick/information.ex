@@ -17,9 +17,9 @@ defmodule QuickPick.Information do
       [%Delivery{}, ...]
 
   """
-  def get_driver_location(current_user)do
-
+  def get_driver_location(current_user) do
   end
+
   def subscribe() do
     Phoenix.PubSub.subscribe(QuickPick.PubSub, "information")
   end

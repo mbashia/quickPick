@@ -6,7 +6,7 @@ defmodule QuickPickWeb.DriverLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok,socket}
+    {:ok, socket}
   end
 
   @impl true
@@ -14,10 +14,8 @@ defmodule QuickPickWeb.DriverLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-
   defp apply_action(socket, :index, _params) do
     socket
-    |>assign(:title, "heeyy")
+    |> assign(:title, "heeyy")
   end
-
 end

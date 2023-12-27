@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>From:</strong>
     <%= @delivery.from %>
@@ -59,8 +58,10 @@
     <strong>Status:</strong>
     <%= @delivery.status %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.delivery_show_path(@socket, :edit, @delivery), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.delivery_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.delivery_show_path(@socket, :edit, @delivery), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.delivery_index_path(@socket, :index)) %></span>

@@ -80,10 +80,8 @@ defmodule QuickPickWeb.Router do
     live "/deliveries/:id", DeliveryLive.Show, :show
     live "/deliveries/:id/show/edit", DeliveryLive.Show, :edit
 
-
     live "/rider", DriverLive.Index, :index
     live "/client", UserLive.Index, :index
-
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
