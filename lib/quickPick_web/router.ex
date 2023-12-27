@@ -73,6 +73,12 @@ defmodule QuickPickWeb.Router do
 
   scope "/", QuickPickWeb do
     pipe_through [:browser, :require_authenticated_user]
+    live "/deliveries", DeliveryLive.Index, :index
+    live "/deliveries/new", DeliveryLive.Index, :new
+    live "/deliveries/:id/edit", DeliveryLive.Index, :edit
+
+    live "/deliveries/:id", DeliveryLive.Show, :show
+    live "/deliveries/:id/show/edit", DeliveryLive.Show, :edit
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

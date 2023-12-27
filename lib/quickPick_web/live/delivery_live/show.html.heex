@@ -1,0 +1,66 @@
+<h1>Show Delivery</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.delivery_show_path(@socket, :show, @delivery)}>
+    <.live_component
+      module={QuickPickWeb.DeliveryLive.FormComponent}
+      id={@delivery.id}
+      title={@page_title}
+      action={@live_action}
+      delivery={@delivery}
+      return_to={Routes.delivery_show_path(@socket, :show, @delivery)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>From:</strong>
+    <%= @delivery.from %>
+  </li>
+
+  <li>
+    <strong>To:</strong>
+    <%= @delivery.to %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @delivery.price %>
+  </li>
+
+  <li>
+    <strong>Lats:</strong>
+    <%= @delivery.lats %>
+  </li>
+
+  <li>
+    <strong>Long:</strong>
+    <%= @delivery.long %>
+  </li>
+
+  <li>
+    <strong>Customer name:</strong>
+    <%= @delivery.customer_name %>
+  </li>
+
+  <li>
+    <strong>Customer phone:</strong>
+    <%= @delivery.customer_phone %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @delivery.description %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @delivery.status %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.delivery_show_path(@socket, :edit, @delivery), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.delivery_index_path(@socket, :index) %></span>

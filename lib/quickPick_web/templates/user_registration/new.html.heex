@@ -5,94 +5,203 @@
   <div class="border-l-[1px] border-t-[1px] w-[60%]">
     <div class=" flex  justify-center items-center flex-col w-full px-4 py-4">
       <div class="flex justify-items content-center">
-        <div class=" border px-6 shadow-xl hover:bg-[#4DAC46] hover:text-white poppins-regular hover:cursor-pointer  text-black mb-4 transition ease-in-out duration-300">
+        <div
+        
+          onclick="showRegistrationForm('client')"
+          class=" border px-6 shadow-xl hover:bg-[#4DAC46] hover:text-white poppins-regular hover:cursor-pointer  text-black mb-4 transition ease-in-out duration-300"
+        >
           <span>Client</span>
         </div>
-        <div class=" border px-6 shadow-xl hover:bg-[#4DAC46] hover:text-white poppins-regular hover:cursor-pointer  text-black mb-4 transition ease-in-out duration-300">
+        <div
+          onclick="showRegistrationForm('rider')"
+          class=" border px-6 shadow-xl hover:bg-[#4DAC46] hover:text-white poppins-regular hover:cursor-pointer  text-black mb-4 transition ease-in-out duration-300"
+        >
           <span>Rider</span>
         </div>
       </div>
       <span class="mb-4 poppins-bold text-2xl uppercase">SIGN UP</span>
-
-      <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
-        <%= if @changeset.action do %>
-          <div class="alert alert-danger">
-            <p>Oops, something went wrong! Please check the errors below.</p>
-          </div>
-        <% end %>
-
-        <div class="   flex flex-col">
-          <div class="flex flex-row gap-4 mb-6">
-            <div>
-              <%= text_input(f, :firstname,
-                required: true,
-                class:
-                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
-                placeholder: "Firstname"
-              ) %>
-              <%= error_tag(f, :firstname) %>
+      <div id="client" style="display:block;">
+        <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+          <%= if @changeset.action do %>
+            <div class="alert alert-danger">
+              <p>Oops, something went wrong! Please check the errors below.</p>
             </div>
+          <% end %>
 
-            <div>
-              <%= text_input(f, :lastname,
+          <div class="   flex flex-col">
+            <div class=" w-full flex flex-row gap-4 mb-6">
+              <div>
+                <%= text_input(f, :firstname,
+                  required: true,
+                  class:
+                    "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+                  placeholder: "Firstname"
+                ) %>
+                <%= error_tag(f, :firstname) %>
+              </div>
+
+              <div>
+                <%= text_input(f, :lastname,
+                  required: true,
+                  placeholder: "Second name",
+                  class:
+                    "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                ) %>
+                <%= error_tag(f, :lastname) %>
+              </div>
+            </div>
+            <div class="mb-6">
+              <%= text_input(f, :phone,
                 required: true,
-                placeholder: "Second name",
+                placeholder: "Phone number",
                 class:
                   "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
               ) %>
-              <%= error_tag(f, :lastname) %>
+              <%= error_tag(f, :phone) %>
+            </div>
+
+            <div class="mb-6">
+              <%= email_input(f, :email,
+                required: true,
+                placeholder: "Email",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :email) %>
+            </div>
+
+            <div class="mb-6">
+              <%= password_input(f, :password,
+                required: true,
+                placeholder: "Password",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :password) %>
+            </div>
+
+            <div class="mb-6">
+              <%= password_input(f, :confirm_pass,
+                required: true,
+                placeholder: "Confirm password",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :confirm_pass) %>
+            </div>
+            <div>
+              <%= hidden_input(f, :role, value: "customer") %>
             </div>
           </div>
-          <div class="mb-6">
-            <%= text_input(f, :phone,
-              required: true,
-              placeholder: "Phone number",
-              class:
-                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-            ) %>
-            <%= error_tag(f, :phone) %>
+
+          <div class="flex justify-center items-center  mb-4 ja-font text-white text-xl ">
+            <div class="bg-[#4DAC46] rounded-2xl px-6 py-2">
+              <%= submit("Register") %>
+            </div>
+          </div>
+        </.form>
+      </div>
+      <div id="rider" style="display:none;">
+        <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+          <%= if @changeset.action do %>
+            <div class="alert alert-danger">
+              <p>Oops, something went wrong! Please check the errors below.</p>
+            </div>
+          <% end %>
+         
+
+          <div class="   flex flex-col">
+            <div class=" w-full flex flex-row gap-4 mb-6">
+              <div class = "w-[50%]">
+                <%= text_input(f, :firstname,
+                  required: true,
+                  class:
+                    "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+                  placeholder: "Firstname"
+                ) %>
+                <%= error_tag(f, :firstname) %>
+              </div>
+
+              <div class = "w-[50%]">
+                <%= text_input(f, :lastname,
+                  required: true,
+                  placeholder: "Second name",
+                  class:
+                    "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                ) %>
+                <%= error_tag(f, :lastname) %>
+              </div>
+            </div>
+            <div class="flex flex-row gap-4 mb-6">
+            <div ><%= text_input(f, :phone,
+                required: true,
+                placeholder: "Phone number",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :phone) %></div>
+                        <div ><%= text_input(f, :id_number,
+                required: true,
+                placeholder: "Id number",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :id_number) %></div>
+
+            <div >
+            <%= date_input(f, :dob,
+                required: true,
+                placeholder: "Date of Birth",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :dob) %></div>
+
+              
+            </div>
+
+            <div class="mb-6">
+              <%= email_input(f, :email,
+                required: true,
+                placeholder: "Email",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :email) %>
+            </div>
+
+            <div class="mb-6">
+              <%= password_input(f, :password,
+                required: true,
+                placeholder: "Password",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :password) %>
+            </div>
+
+            <div class="mb-6">
+              <%= password_input(f, :confirm_pass,
+                required: true,
+                placeholder: "Confirm password",
+                class:
+                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+              ) %>
+              <%= error_tag(f, :confirm_pass) %>
+            </div>
+            <div>
+<div>
+              <%= hidden_input(f, :role, value: "rider") %>
+            </div>            </div>
           </div>
 
-          <div class="mb-6">
-            <%= email_input(f, :email,
-              required: true,
-              placeholder: "Email",
-              class:
-                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-            ) %>
-            <%= error_tag(f, :email) %>
+          <div class="flex justify-center items-center  mb-4 ja-font text-white text-xl ">
+            <div class="bg-[#4DAC46] rounded-2xl px-6 py-2">
+              <%= submit("Register") %>
+            </div>
           </div>
-
-          <div class="mb-6">
-            <%= password_input(f, :password,
-              required: true,
-              placeholder: "Password",
-              class:
-                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-            ) %>
-            <%= error_tag(f, :password) %>
-          </div>
-
-          <div class="mb-6">
-            <%= password_input(f, :confirm_pass,
-              required: true,
-              placeholder: "Confirm password",
-              class:
-                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-            ) %>
-            <%= error_tag(f, :confirm_pass) %>
-          </div>
-          <div>
-            <%= hidden_input(f, :role, value: "customer") %>
-          </div>
-        </div>
-
-        <div class="flex justify-center items-center  mb-4 ja-font text-white text-xl ">
-          <div class="bg-[#4DAC46] rounded-2xl px-6 py-2">
-            <%= submit("Register") %>
-          </div>
-        </div>
-      </.form>
+        </.form>
+      </div>
 
       <p>
         <%= link("Log in", to: Routes.user_session_path(@conn, :new)) %> | <%= link(
@@ -102,4 +211,19 @@
       </p>
     </div>
   </div>
+
+  <script>
+    function showRegistrationForm(target) {
+      var clientDiv = document.getElementById('client');
+      var riderDiv = document.getElementById('rider');
+
+      if (target === 'client') {
+        clientDiv.style.display = 'block';
+        riderDiv.style.display = 'none';
+      } else if (target === 'rider') {
+        clientDiv.style.display = 'none';
+        riderDiv.style.display = 'block';
+      }
+    }
+  </script>
 </div>

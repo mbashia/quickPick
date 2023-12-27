@@ -29,6 +29,23 @@
           <li><%= link("Log in", to: Routes.user_session_path(@conn, :new)) %></li>
         <% end %>
       </ul>
+      <style>
+  .registration-form {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, height 0.3s ease-in-out;
+  }
+
+  .hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+  }
+
+  .visible {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+  }
+</style>
       <%= @inner_content %>
     </div>
   </body>
