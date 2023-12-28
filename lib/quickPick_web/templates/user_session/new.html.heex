@@ -1,43 +1,42 @@
-<div class="flex  h-[75vh] rounded-3xl shadow-xl">
+<div class="ml-[10%] flex  h-[75vh] rounded-3xl shadow-xl">
   <div class=" w-[40%] overflow-hidden ">
     <img src="/images/quickPick.jpeg" alt="Description of the image" class=" h-[100%] " />
   </div>
   <div class="border-l-[1px] border-t-[1px] w-[60%]">
-    <div class=" flex  justify-center items-center flex-col w-full px-4 py-4">
+    <div class=" flex  justify-center items-center flex-col w-auto h-[100%] px-4 py-4">
       <span class="mb-4 poppins-bold text-2xl uppercase">SIGN IN</span>
-      <div id="client" style="display:block;">
-        <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
-          <%= if @error_message do %>
-            <div class="alert alert-danger">
-              <p><%= @error_message %></p>
-            </div>
-          <% end %>
 
-          <div class="   flex flex-col">
-            <div class="mb-6">
-              <%= email_input(f, :email,
-                required: true,
-                class:
-                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
-                placeholder: "email"
-              ) %>
-              <%= error_tag(f, :email) %>
-            </div>
+      <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
+        <%= if @error_message do %>
+          <div class="alert alert-danger">
+            <p><%= @error_message %></p>
+          </div>
+        <% end %>
 
-            <div class="mb-6">
-              <%= text_input(f, :password,
-                required: true,
-                placeholder: "Second name",
-                class:
-                  "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-              ) %>
-              <%= error_tag(f, :password) %>
-            </div>
+        <div class="  w-[600px]  h-[100%] flex flex-col">
+          <div class="mb-6">
+            <%= email_input(f, :email,
+              required: true,
+              class:
+                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500",
+              placeholder: "email"
+            ) %>
+            <%= error_tag(f, :email) %>
+          </div>
 
-            <div class="mb-6">
-              <%= label(f, :remember_me, "Keep me logged in for 60 days") %>
-              <%= checkbox(f, :remember_me) %>
-            </div>
+          <div class="mb-6">
+            <%= password_input(f, :password,
+              required: true,
+              placeholder: "Password",
+              class:
+                "w-full  pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+            ) %>
+            <%= error_tag(f, :password) %>
+          </div>
+
+          <div class="mb-6">
+            <%= label(f, :remember_me, "Keep me logged in for 60 days") %>
+            <%= checkbox(f, :remember_me) %>
           </div>
 
           <div class="flex justify-center items-center  mb-4 ja-font text-white text-xl ">
@@ -45,14 +44,14 @@
               <%= submit("Log in") %>
             </div>
           </div>
-        </.form>
-        <p>
-          <%= link("Log in", to: Routes.user_session_path(@conn, :new)) %> | <%= link(
-            "Forgot your password?",
-            to: Routes.user_reset_password_path(@conn, :new)
-          ) %>
-        </p>
-      </div>
+        </div>
+      </.form>
+      <p>
+        <%= link("sign up", to: Routes.user_registration_path(@conn, :new)) %> | <%= link(
+          "Forgot your password?",
+          to: Routes.user_reset_password_path(@conn, :new)
+        ) %>
+      </p>
     </div>
   </div>
 </div>

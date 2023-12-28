@@ -1,11 +1,61 @@
-<main class="container">
-  <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">
-    <%= live_flash(@flash, :info) %>
-  </p>
+<main>
+  <%= if @flash["info"] do %>
+    <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">
+      <%= live_flash(@flash, :info) %>
+    </p>
+  <% end %>
 
-  <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">
-    <%= live_flash(@flash, :error) %>
-  </p>
-
-  <%= @inner_content %>
+  <%= if @flash["error"] do %>
+    <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">
+      <%= live_flash(@flash, :error) %>
+    </p>
+  <% end %>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCofEHIsoFbtmxqUvDMQgbHTRIfJ1yrARI&libraries=places&callback=initAutoComplete"
+    defer
+  >
+  </script>
+  <nav class="flex px-6 py-4 justify-between text-white font-bold  bg-[#03C04A] w-full h-[10vh]">
+    <div class="text-white text-2xl poppins-regular hover:underline transition ease-in-out duration-300 ">
+      <span>Make Delivery</span>
+    </div>
+    <div class="flex gap-4">
+      <div class="text-white text-2xl poppins-regular hover:underline transition ease-in-out duration-300">
+        My Deliveries
+      </div>
+      <div class="flex">
+        <div class="h-[30px] flex justify-center items-center w-[30px] rounded-full bg-gray-100 ">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 text-gray-400"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </div>
+        <div class = "mt-2 hover:cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div>
+    <%= @inner_content %>
+  </div>
 </main>
