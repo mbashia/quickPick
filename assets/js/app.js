@@ -35,22 +35,68 @@ window.addEventListener("phx:page-loading-stop", info => topbar.hide())
 
 // const x = document.getElementById("demo");
 console.log("im here")
-function getLocationAndSendUpdate() {
+// function getLocationAndSendUpdate() {
+//   // Get the current location using the Geolocation API
+//   navigator.geolocation.getCurrentPosition(
+//     position => {
+//       const { latitude, longitude } = position.coords;
+//       const currentLocation = { latitude, longitude };
+// console.log(currentLocation);
+//       // Update the location on the server
+//     },
+//     error => {
+//       console.error('Error getting location:', error.message);
+//     }
+//   );
+// }
+// console.log("currentlocationbelow")
+// getLocationAndSendUpdate();
+function getLocationAndSendUpdate(user_id, user_type) {
   // Get the current location using the Geolocation API
   navigator.geolocation.getCurrentPosition(
     position => {
       const { latitude, longitude } = position.coords;
       const currentLocation = { latitude, longitude };
-console.log(currentLocation);
-      // Update the location on the server
+      // Send a POST request to the server to update the location
+      fetch('http://localhost:4000/api/userlocations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: user_id,
+          user_type: user_type,
+          latitude: latitude,
+          longitude: longitude,
+        }),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Handle the response data if needed
+          console.log('Location update successful:', data);
+        })
+        .catch(error => {
+          console.error('Error updating location:', error.message);
+        });
     },
     error => {
       console.error('Error getting location:', error.message);
     }
   );
 }
-console.log("currentlocationbelow")
-getLocationAndSendUpdate();
+
+// Example usage:
+const user_id = 123; // Replace with the actual user ID
+const user_type = 'driver'; // Replace with the actual user type
+// setInterval(() => {
+//   // Get the current location and update on the server
+//   getLocationAndSendUpdate(user_id, user_type);
+// }, 1000);
 let Hooks = {};
 Hooks.Map = {
   mounted() {

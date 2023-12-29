@@ -24,9 +24,11 @@ defmodule QuickPickWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", QuickPickWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", QuickPickWeb do
+    pipe_through :api
+    resources "/userlocations", UserLocationsController, except: [:new, :edit]
+
+  end
 
   # Enables LiveDashboard only for development
   #

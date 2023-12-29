@@ -1,6 +1,7 @@
-defmodule QuickPick.Account.User do
+defmodule  do
   use Ecto.Schema
   import Ecto.Changeset
+  alias QuickPick.UserLocation.UserLocations
 
   schema "users" do
     field :email, :string
@@ -14,6 +15,7 @@ defmodule QuickPick.Account.User do
 
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    has_many :user_locations, UserLocations
 
     timestamps()
   end
