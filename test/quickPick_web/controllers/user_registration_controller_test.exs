@@ -1,7 +1,7 @@
 defmodule QuickPickWeb.UserRegistrationControllerTest do
   use QuickPickWeb.ConnCase
 
-  import QuickPick.AccountFixtures
+  import QuickPick.AccountsFixtures
 
   describe "GET /users/register" do
     test "renders registration page", %{conn: conn} do
@@ -20,7 +20,7 @@ defmodule QuickPickWeb.UserRegistrationControllerTest do
 
   describe "POST /users/register" do
     @tag :capture_log
-    test "creates account and logs the user in", %{conn: conn} do
+    test "creates Accounts and logs the user in", %{conn: conn} do
       email = unique_user_email()
 
       conn =

@@ -7,6 +7,7 @@ defmodule QuickPick.Information do
   alias QuickPick.Repo
 
   alias QuickPick.Deliveries.Delivery
+  alias QuickPick.UserLocation.UserLocations
 
   @doc """
   Returns the list of deliveries.
@@ -28,5 +29,18 @@ defmodule QuickPick.Information do
     Phoenix.PubSub.broadcast(QuickPick.PubSub, "information", {tag, info})
 
     {:ok, info}
+  end
+
+  def get_user_location_record(user_id) do
+    results = Repo.one(from(l in UserLocations, where: l.user_id == ^user_id))
+    IO.inspect(results)
+
+    case results do
+      nil ->
+        {:no_record, "no record found"}
+
+     user ->
+        {:record_found, user}
+    end
   end
 end

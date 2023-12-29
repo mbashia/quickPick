@@ -1,4 +1,4 @@
-defmodule  do
+defmodule QuickPick.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias QuickPick.UserLocation.UserLocations
@@ -137,7 +137,7 @@ defmodule  do
   end
 
   @doc """
-  Confirms the account by setting `confirmed_at`.
+  Confirms the Accounts by setting `confirmed_at`.
   """
   def confirm_changeset(user) do
     now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
@@ -150,7 +150,7 @@ defmodule  do
   If there is no user or the user doesn't have a password, we call
   `Bcrypt.no_user_verify/0` to avoid timing attacks.
   """
-  def valid_password?(%QuickPick.Account.User{hashed_password: hashed_password}, password)
+  def valid_password?(%QuickPick.Accounts.User{hashed_password: hashed_password}, password)
       when is_binary(hashed_password) and byte_size(password) > 0 do
     Bcrypt.verify_pass(password, hashed_password)
   end

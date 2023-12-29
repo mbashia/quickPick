@@ -1,13 +1,13 @@
-defmodule QuickPick.Account.UserToken do
+defmodule QuickPick.Accounts.UserToken do
   use Ecto.Schema
   import Ecto.Query
-  alias QuickPick.Account.UserToken
+  alias QuickPick.Accounts.UserToken
 
   @hash_algorithm :sha256
   @rand_size 32
 
   # It is very important to keep the reset password token expiry short,
-  # since someone with access to the email may take over the account.
+  # since someone with access to the email may take over the Accounts.
   @reset_password_validity_in_days 1
   @confirm_validity_in_days 7
   @change_email_validity_in_days 7
@@ -17,7 +17,7 @@ defmodule QuickPick.Account.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, QuickPick.Account.User
+    belongs_to :user, QuickPick.Accounts.User
 
     timestamps(updated_at: false)
   end
@@ -103,7 +103,7 @@ defmodule QuickPick.Account.UserToken do
   database and the user email has not changed. This function also checks
   if the token is being used within a certain period, depending on the
   context. The default contexts supported by this function are either
-  "confirm", for account confirmation emails, and "reset_password",
+  "confirm", for Accounts confirmation emails, and "reset_password",
   for resetting the password. For verifying requests to change the email,
   see `verify_change_email_token_query/2`.
   """

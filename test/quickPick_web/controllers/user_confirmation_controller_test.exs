@@ -1,9 +1,9 @@
 defmodule QuickPickWeb.UserConfirmationControllerTest do
   use QuickPickWeb.ConnCase
 
-  alias QuickPick.Account
+  alias QuickPick.Accounts
   alias QuickPick.Repo
-  import QuickPick.AccountFixtures
+  import QuickPick.AccountsFixtures
 
   setup do
     %{user: user_fixture()}
@@ -27,11 +27,11 @@ defmodule QuickPickWeb.UserConfirmationControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.get_by!(Account.UserToken, user_id: user.id).context == "confirm"
+      assert Repo.get_by!(Accounts.UserToken, user_id: user.id).context == "confirm"
     end
 
     test "does not send confirmation token if User is confirmed", %{conn: conn, user: user} do
-      Repo.update!(Account.User.confirm_changeset(user))
+      Repo.update!(Accounts.User.confirm_changeset(user))
 
       conn =
         post(conn, Routes.user_confirmation_path(conn, :create), %{
@@ -40,7 +40,7 @@ defmodule QuickPickWeb.UserConfirmationControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      refute Repo.get_by(Account.UserToken, user_id: user.id)
+      refute Repo.get_by(Accounts.UserToken, user_id: user.id)
     end
 
     test "does not send confirmation token if email is invalid", %{conn: conn} do
@@ -51,7 +51,7 @@ defmodule QuickPickWeb.UserConfirmationControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.all(Account.UserToken) == []
+      assert Repo.all(Accounts.UserToken) == []
     end
   end
 
@@ -59,7 +59,7 @@ defmodule QuickPickWeb.UserConfirmationControllerTest do
     test "renders the confirmation page", %{conn: conn} do
       conn = get(conn, Routes.user_confirmation_path(conn, :edit, "some-token"))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Confirm account</h1>"
+      assert response =~ "<h1>Confirm Accounts</h1>"
 
       form_action = Routes.user_confirmation_path(conn, :update, "some-token")
       assert response =~ "action=\"#{form_action}\""
@@ -70,15 +70,15 @@ defmodule QuickPickWeb.UserConfirmationControllerTest do
     test "confirms the given token once", %{conn: conn, user: user} do
       token =
         extract_user_token(fn url ->
-          Account.deliver_user_confirmation_instructions(user, url)
+          Accounts.deliver_user_confirmation_instructions(user, url)
         end)
 
       conn = post(conn, Routes.user_confirmation_path(conn, :update, token))
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "User confirmed successfully"
-      assert Account.get_user!(user.id).confirmed_at
+      assert Accounts.get_user!(user.id).confirmed_at
       refute get_session(conn, :user_token)
-      assert Repo.all(Account.UserToken) == []
+      assert Repo.all(Accounts.UserToken) == []
 
       # When not logged in
       conn = post(conn, Routes.user_confirmation_path(conn, :update, token))
@@ -99,7 +99,7 @@ defmodule QuickPickWeb.UserConfirmationControllerTest do
       conn = post(conn, Routes.user_confirmation_path(conn, :update, "oops"))
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :error) =~ "User confirmation link is invalid or it has expired"
-      refute Account.get_user!(user.id).confirmed_at
+      refute Accounts.get_user!(user.id).confirmed_at
     end
   end
 end

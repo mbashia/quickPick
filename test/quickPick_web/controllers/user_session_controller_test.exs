@@ -1,7 +1,7 @@
 defmodule QuickPickWeb.UserSessionControllerTest do
   use QuickPickWeb.ConnCase
 
-  import QuickPick.AccountFixtures
+  import QuickPick.AccountsFixtures
 
   setup do
     %{user: user_fixture()}

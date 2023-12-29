@@ -1,7 +1,7 @@
-defmodule QuickPick.AccountFixtures do
+defmodule QuickPick.AccountsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `QuickPick.Account` context.
+  entities via the `QuickPick.Accounts` context.
   """
 
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
@@ -18,7 +18,7 @@ defmodule QuickPick.AccountFixtures do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
-      |> QuickPick.Account.register_user()
+      |> QuickPick.Accounts.register_user()
 
     user
   end

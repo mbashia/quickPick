@@ -1,7 +1,7 @@
 defmodule QuickPickWeb.UserSettingsController do
   use QuickPickWeb, :controller
 
-  alias QuickPick.Account
+  alias QuickPick.Accounts
   alias QuickPickWeb.UserAuth
 
   plug :assign_email_and_password_changesets
@@ -14,9 +14,9 @@ defmodule QuickPickWeb.UserSettingsController do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
 
-    case Account.apply_user_email(user, password, user_params) do
+    case Accounts.apply_user_email(user, password, user_params) do
       {:ok, applied_user} ->
-        Account.deliver_update_email_instructions(
+        Accounts.deliver_update_email_instructions(
           applied_user,
           user.email,
           &Routes.user_settings_url(conn, :confirm_email, &1)
@@ -38,7 +38,7 @@ defmodule QuickPickWeb.UserSettingsController do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
 
-    case Account.update_user_password(user, password, user_params) do
+    case Accounts.update_user_password(user, password, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Password updated successfully.")
@@ -51,7 +51,7 @@ defmodule QuickPickWeb.UserSettingsController do
   end
 
   def confirm_email(conn, %{"token" => token}) do
-    case Account.update_user_email(conn.assigns.current_user, token) do
+    case Accounts.update_user_email(conn.assigns.current_user, token) do
       :ok ->
         conn
         |> put_flash(:info, "Email changed successfully.")
@@ -68,7 +68,7 @@ defmodule QuickPickWeb.UserSettingsController do
     user = conn.assigns.current_user
 
     conn
-    |> assign(:email_changeset, Account.change_user_email(user))
-    |> assign(:password_changeset, Account.change_user_password(user))
+    |> assign(:email_changeset, Accounts.change_user_email(user))
+    |> assign(:password_changeset, Accounts.change_user_password(user))
   end
 end

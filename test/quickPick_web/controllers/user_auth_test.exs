@@ -1,9 +1,9 @@
 defmodule QuickPickWeb.UserAuthTest do
   use QuickPickWeb.ConnCase
 
-  alias QuickPick.Account
+  alias QuickPick.Accounts
   alias QuickPickWeb.UserAuth
-  import QuickPick.AccountFixtures
+  import QuickPick.AccountsFixtures
 
   @remember_me_cookie "_quick_pick_web_user_remember_me"
 
@@ -22,7 +22,7 @@ defmodule QuickPickWeb.UserAuthTest do
       assert token = get_session(conn, :user_token)
       assert get_session(conn, :live_socket_id) == "users_sessions:#{Base.url_encode64(token)}"
       assert redirected_to(conn) == "/"
-      assert Account.get_user_by_session_token(token)
+      assert Accounts.get_user_by_session_token(token)
     end
 
     test "clears everything previously stored in the session", %{conn: conn, user: user} do
@@ -47,7 +47,7 @@ defmodule QuickPickWeb.UserAuthTest do
 
   describe "logout_user/1" do
     test "erases session and cookies", %{conn: conn, user: user} do
-      user_token = Account.generate_user_session_token(user)
+      user_token = Accounts.generate_user_session_token(user)
 
       conn =
         conn
@@ -60,7 +60,7 @@ defmodule QuickPickWeb.UserAuthTest do
       refute conn.cookies[@remember_me_cookie]
       assert %{max_age: 0} = conn.resp_cookies[@remember_me_cookie]
       assert redirected_to(conn) == "/"
-      refute Account.get_user_by_session_token(user_token)
+      refute Accounts.get_user_by_session_token(user_token)
     end
 
     test "broadcasts to the given live_socket_id", %{conn: conn} do
@@ -84,7 +84,7 @@ defmodule QuickPickWeb.UserAuthTest do
 
   describe "fetch_current_user/2" do
     test "authenticates user from session", %{conn: conn, user: user} do
-      user_token = Account.generate_user_session_token(user)
+      user_token = Accounts.generate_user_session_token(user)
       conn = conn |> put_session(:user_token, user_token) |> UserAuth.fetch_current_user([])
       assert conn.assigns.current_user.id == user.id
     end
@@ -106,7 +106,7 @@ defmodule QuickPickWeb.UserAuthTest do
     end
 
     test "does not authenticate if data is missing", %{conn: conn, user: user} do
-      _ = Account.generate_user_session_token(user)
+      _ = Accounts.generate_user_session_token(user)
       conn = UserAuth.fetch_current_user(conn, [])
       refute get_session(conn, :user_token)
       refute conn.assigns.current_user

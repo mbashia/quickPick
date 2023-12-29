@@ -3,6 +3,7 @@ defmodule QuickPickWeb.UserLocationsController do
 
   alias QuickPick.UserLocation
   alias QuickPick.UserLocation.UserLocations
+  alias QuickPick.Information
 
   action_fallback QuickPickWeb.FallbackController
 
@@ -21,23 +22,43 @@ defmodule QuickPickWeb.UserLocationsController do
   # end
   def create(conn, params) do
     IO.inspect(params)
-    latitude =Float.to_string(params["latitude"])
-    longitude =Float.to_string(params["longitude"])
-IO.inspect latitude
-IO.inspect longitude
+    latitude = Float.to_string(params["latitude"])
+    longitude = Float.to_string(params["longitude"])
+    user_id = params["user_id"]
+    result = Information.get_user_location_record(user_id)
+    IO.inspect(result)
+
     location_params = %{
-      "user_id" => params["user_id"],
+      "user_id" => user_id,
       "latitude" => latitude,
       "longitude" => longitude,
       "user_type" => params["user_type"]
     }
-    with {:ok, %UserLocations{} = location_params} <- UserLocation.create_user_locations(location_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.user_locations_path(conn, :show, location_params))
-      |> render("show.json", user_locations: location_params)
+
+    case result do
+      {:no_record, "no record found"} ->
+        with {:ok, %UserLocations{} = location_params} <-
+               UserLocation.create_user_locations(location_params) do
+          conn
+          |> put_status(:created)
+          |> put_resp_header("location", Routes.user_locations_path(conn, :show, location_params))
+          |> render("show.json", user_locations: location_params)
+        end
+
+      {:record_found, user} ->
+
+        with {:ok, %UserLocations{} = location_params} <-
+               UserLocation.update_user_locations(user, location_params) do
+          conn
+          |> put_status(:created)
+          |> put_resp_header("location", Routes.user_locations_path(conn, :show, location_params))
+          |> render("show.json", user_locations: location_params)
+        end
     end
+
+
   end
+
   def show(conn, %{"id" => id}) do
     user_locations = UserLocation.get_user_locations!(id)
     render(conn, "show.json", user_locations: user_locations)
@@ -46,7 +67,8 @@ IO.inspect longitude
   def update(conn, %{"id" => id, "user_locations" => user_locations_params}) do
     user_locations = UserLocation.get_user_locations!(id)
 
-    with {:ok, %UserLocations{} = user_locations} <- UserLocation.update_user_locations(user_locations, user_locations_params) do
+    with {:ok, %UserLocations{} = user_locations} <-
+           UserLocation.update_user_locations(user_locations, user_locations_params) do
       render(conn, "show.json", user_locations: user_locations)
     end
   end

@@ -1,15 +1,15 @@
 defmodule QuickPickWeb.UserConfirmationController do
   use QuickPickWeb, :controller
 
-  alias QuickPick.Account
+  alias QuickPick.Accounts
 
   def new(conn, _params) do
     render(conn, "new.html")
   end
 
   def create(conn, %{"user" => %{"email" => email}}) do
-    if user = Account.get_user_by_email(email) do
-      Account.deliver_user_confirmation_instructions(
+    if user = Accounts.get_user_by_email(email) do
+      Accounts.deliver_user_confirmation_instructions(
         user,
         &Routes.user_confirmation_url(conn, :edit, &1)
       )
@@ -29,16 +29,16 @@ defmodule QuickPickWeb.UserConfirmationController do
   end
 
   # Do not log in the user after confirmation to avoid a
-  # leaked token giving the user access to the account.
+  # leaked token giving the user access to the Accounts.
   def update(conn, %{"token" => token}) do
-    case Account.confirm_user(token) do
+    case Accounts.confirm_user(token) do
       {:ok, _} ->
         conn
         |> put_flash(:info, "User confirmed successfully.")
         |> redirect(to: "/")
 
       :error ->
-        # If there is a current user and the account was already confirmed,
+        # If there is a current user and the Accounts was already confirmed,
         # then odds are that the confirmation link was already visited, either
         # by some automation or by the user themselves, so we redirect without
         # a warning message.

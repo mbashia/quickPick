@@ -1,12 +1,12 @@
-defmodule QuickPick.Account do
+defmodule QuickPick.Accounts do
   @moduledoc """
-  The Account context.
+  The Accounts context.
   """
 
   import Ecto.Query, warn: false
   alias QuickPick.Repo
 
-  alias QuickPick.Account.{User, UserToken, UserNotifier}
+  alias QuickPick.Accounts.{User, UserToken, UserNotifier}
 
   ## Database getters
 
@@ -270,7 +270,7 @@ defmodule QuickPick.Account do
   @doc """
   Confirms a user by the given token.
 
-  If the token matches, the user account is marked as confirmed
+  If the token matches, the user Accounts is marked as confirmed
   and the token is deleted.
   """
   def confirm_user(token) do

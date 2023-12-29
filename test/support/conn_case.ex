@@ -46,7 +46,7 @@ defmodule QuickPickWeb.ConnCase do
   test context.
   """
   def register_and_log_in_user(%{conn: conn}) do
-    user = QuickPick.AccountFixtures.user_fixture()
+    user = QuickPick.AccountsFixtures.user_fixture()
     %{conn: log_in_user(conn, user), user: user}
   end
 
@@ -56,7 +56,7 @@ defmodule QuickPickWeb.ConnCase do
   It returns an updated `conn`.
   """
   def log_in_user(conn, user) do
-    token = QuickPick.Account.generate_user_session_token(user)
+    token = QuickPick.Accounts.generate_user_session_token(user)
 
     conn
     |> Phoenix.ConnTest.init_test_session(%{})

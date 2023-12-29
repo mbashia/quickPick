@@ -1,4 +1,4 @@
-defmodule QuickPick.Account.UserNotifier do
+defmodule QuickPick.Accounts.UserNotifier do
   import Swoosh.Email
 
   alias QuickPick.Mailer
@@ -18,7 +18,7 @@ defmodule QuickPick.Account.UserNotifier do
   end
 
   @doc """
-  Deliver instructions to confirm account.
+  Deliver instructions to confirm Accounts.
   """
   def deliver_confirmation_instructions(user, url) do
     deliver(user.email, "Confirmation instructions", """
@@ -27,11 +27,11 @@ defmodule QuickPick.Account.UserNotifier do
 
     Hi #{user.email},
 
-    You can confirm your account by visiting the URL below:
+    You can confirm your Accounts by visiting the URL below:
 
     #{url}
 
-    If you didn't create an account with us, please ignore this.
+    If you didn't create an Accounts with us, please ignore this.
 
     ==============================
     """)

@@ -27,7 +27,6 @@ defmodule QuickPickWeb.Router do
   scope "/api", QuickPickWeb do
     pipe_through :api
     resources "/userlocations", UserLocationsController, except: [:new, :edit]
-
   end
 
   # Enables LiveDashboard only for development
