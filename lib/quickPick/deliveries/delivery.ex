@@ -7,8 +7,10 @@ defmodule QuickPick.Deliveries.Delivery do
     field :customer_phone, :string
     field :description, :string
     field :from, :string
-    field :lats, :string
-    field :long, :string
+    field :lats_from, :string
+    field :long_from, :string
+    field :lats_to, :string
+    field :long_to, :string
     field :price, :string
     field :status, :string
     field :to, :string
@@ -23,8 +25,10 @@ defmodule QuickPick.Deliveries.Delivery do
       :from,
       :to,
       :price,
-      :lats,
-      :long,
+      :lats_from,
+      :long_from,
+      :lats_to,
+      :long_to,
       :customer_name,
       :customer_phone,
       :description,
@@ -34,8 +38,10 @@ defmodule QuickPick.Deliveries.Delivery do
       :from,
       :to,
       :price,
-      :lats,
-      :long,
+      :lats_from,
+      :long_from,
+      :lats_to,
+      :long_to,
       :customer_name,
       :customer_phone,
       :description,

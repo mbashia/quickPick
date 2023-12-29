@@ -6,8 +6,10 @@ defmodule QuickPick.Repo.Migrations.CreateDeliveries do
       add :from, :string
       add :to, :string
       add :price, :string
-      add :lats, :string
-      add :long, :string
+      add :lats_from, :string
+      add :long_from, :string
+      add :lats_to, :string
+      add :long_to, :string
       add :customer_name, :string
       add :customer_phone, :string
       add :description, :string

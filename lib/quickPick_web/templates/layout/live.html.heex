@@ -1,4 +1,4 @@
-<main>
+<main class="h-[100vh]">
   <%= if @flash["info"] do %>
     <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">
       <%= live_flash(@flash, :info) %>
@@ -10,11 +10,29 @@
       <%= live_flash(@flash, :error) %>
     </p>
   <% end %>
+
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCofEHIsoFbtmxqUvDMQgbHTRIfJ1yrARI&libraries=places&callback=initAutoComplete"
     defer
   >
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </script>
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"
+  >
+  </script>
+
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js">
+  </script>
+  <link
+    rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css"
+    type="text/css"
+  />
   <nav class="flex px-6 py-4 justify-between text-white font-bold  bg-[#03C04A] w-full h-[10vh]">
     <div class="text-white text-2xl poppins-regular hover:underline transition ease-in-out duration-300 ">
       <span>Make Delivery</span>
@@ -40,7 +58,7 @@
             />
           </svg>
         </div>
-        <div class = "mt-2 hover:cursor-pointer">
+        <div class="mt-2 hover:cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -55,7 +73,7 @@
       </div>
     </div>
   </nav>
-  <div>
+  <div class="h-[100%]">
     <%= @inner_content %>
   </div>
 </main>
