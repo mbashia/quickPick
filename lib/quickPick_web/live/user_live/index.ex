@@ -3,15 +3,18 @@ defmodule QuickPickWeb.UserLive.Index do
 
   alias QuickPick.Deliveries
   alias QuickPick.Deliveries.Delivery
+  alias QuickPick.Accounts
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
+    user = Accounts.get_user_by_session_token(session["user_token"])
+    IO.inspect(user)
     {:ok,
      socket
-     |> assign(:lats_from, "-1.0387569")
-     |> assign(:lats_to, "-1.0387569")
-     |> assign(:long_from, "37.0833753")
-     |> assign(:long_to, "37.0833753")}
+     |>assign(:user_id,user.id)
+     |>assign(:user_type, user.role)
+
+     }
   end
 
   @impl true

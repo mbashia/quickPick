@@ -22,6 +22,7 @@ defmodule QuickPickWeb.UserLocationsController do
   # end
   def create(conn, params) do
     IO.inspect(params)
+    IO.write("params above")
     latitude = Float.to_string(params["latitude"])
     longitude = Float.to_string(params["longitude"])
     user_id = params["user_id"]

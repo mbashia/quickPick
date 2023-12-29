@@ -51,6 +51,29 @@ console.log("im here")
 // }
 // console.log("currentlocationbelow")
 // getLocationAndSendUpdate();
+
+function getDetails() {
+  var x, y;
+  // Wait for the entire page to load
+  window.onload = function () {
+      // Select the elements by their IDs
+      var element1 = document.getElementById('user_id');
+      var element2 = document.getElementById('user_type');
+
+      if (element1 && element2) {
+        // Assign innerHTML values to variables
+        x = element1.innerHTML;
+        y = element2.innerHTML;
+        console.log(x)
+        console.log(y)
+
+    } else {
+        console.error('One or both elements not found!');
+    }
+  };
+  return x, y;
+
+}
 function getLocationAndSendUpdate(user_id, user_type) {
   // Get the current location using the Geolocation API
   navigator.geolocation.getCurrentPosition(
@@ -88,15 +111,18 @@ function getLocationAndSendUpdate(user_id, user_type) {
       console.error('Error getting location:', error.message);
     }
   );
-}
-
-// Example usage:
-const user_id = 123; // Replace with the actual user ID
-const user_type = 'driver'; // Replace with the actual user type
-// setInterval(() => {
-//   // Get the current location and update on the server
-//   getLocationAndSendUpdate(user_id, user_type);
-// }, 1000);
+} 
+// user_id,user_type = getDetails();
+// console.log("user_id below");
+// console.log(user_id);
+ const user_id=document.getElementById('user_id').innerHTML;
+ const user_type=document.getElementById('user_type').innerHTML;
+console.log(user_id)
+console.log("user_id above")
+setInterval(() => {
+  // Get the current location and update on the server
+  getLocationAndSendUpdate(user_id, user_type);
+}, 7000);
 let Hooks = {};
 Hooks.Map = {
   mounted() {
