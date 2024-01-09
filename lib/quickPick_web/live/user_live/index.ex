@@ -16,7 +16,7 @@ defmodule QuickPickWeb.UserLive.Index do
 
      }
   end
-
+## added not to kill git streak~
   @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
